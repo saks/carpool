@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  from: MyString
+  to: MyString
+  time: 2010-10-14 15:59:36
+  places_number: 1
+  comment: MyString
+
+two:
+  from: MyString
+  to: MyString
+  time: 2010-10-14 15:59:36
+  places_number: 1
+  comment: MyString

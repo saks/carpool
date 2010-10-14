@@ -1,0 +1,20 @@
+.debug { background: #fdfcd9; border: solid 1px #baa984; }
+
+table {border-collapse:separate;border-spacing:0;}
+table.list { }
+table.list tr:nth-child(even) {
+	background: #eee;	
+}
+
+label.line { width: 100px; display: inline-table;}
+
+a.fancy { font-size: large; font-weight: bold; }
+a.add { color: #58BD76; }
+a.cancel { color: #f5a589; }
+
+textarea {width:390px;height:auto;padding:5px;}
+
+ul.places { }
+ul.places li { display: block; float: left; margin: 0; padding: 0;}
+ul.places li.empty { list-style-image: url(img/user-empty.png); }
+ul.places li.busy { list-style-image: url(img/user.png); }

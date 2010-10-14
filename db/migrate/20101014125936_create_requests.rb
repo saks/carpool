@@ -4,7 +4,7 @@ class CreateRequests < ActiveRecord::Migration
     	t.belongs_to :user
       t.string :from
       t.string :to
-      t.time :time
+      t.datetime :time
       t.integer :places_number
       t.string :comment
 

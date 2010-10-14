@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(:version => 20101014125936) do
     t.integer  "user_id"
     t.string   "from"
     t.string   "to"
-    t.time     "time"
+    t.datetime "time"
     t.integer  "places_number"
     t.string   "comment"
     t.datetime "created_at"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(:version => 20101014125936) do
 
   create_table "users", :force => true do |t|
     t.string   "phone_number"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

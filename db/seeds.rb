@@ -7,7 +7,7 @@
 #   Major.create(:name => 'Daley', :city => cities.first)
 
 
-user = User.create :phone_number => '+375292234234'
+user = User.create phone_number: '+375296786785'
 
-user.requests
+user.requests.create :from => 'DI', :to => 'minsk', :time => Time.now, :comment => 'some text', :places_number => 3
 

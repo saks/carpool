@@ -1,9 +1,10 @@
 .debug { background: #fdfcd9; border: solid 1px #baa984; }
-
+.container { }
 table {border-collapse:separate;border-spacing:0;}
 table.list { }
+table.list th { text-align:left; }
 table.list tr:nth-child(even) {
-	background: #eee;	
+	background: #eee;
 }
 
 label.line { width: 100px; display: inline-table;}
@@ -16,5 +17,9 @@ textarea {width:390px;height:auto;padding:5px;}
 
 ul.places { }
 ul.places li { display: block; float: left; margin: 0; padding: 0;}
-ul.places li.empty { list-style-image: url(img/user-empty.png); }
-ul.places li.busy { list-style-image: url(img/user.png); }
+ul.places li.empty { list-style-image: url(/images/user-empty.png); }
+ul.places li.busy { list-style-image: url(/images/user.png); }
+
+a img {border:none;}
+a.logo { text-indent: -9999px; display: block; width: 226px; height: 44px; background: transparent url(/images/logo.png) no-repeat; margin: 0; border: 0; padding: 0; }
+

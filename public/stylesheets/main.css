@@ -1,13 +1,16 @@
 .debug { background: #fdfcd9; border: solid 1px #baa984; }
 .container { }
+
 table {border-collapse:separate;border-spacing:0;}
 table.list { }
 table.list th { text-align:left; }
-table.list tr:nth-child(even) {
-	background: #eee;
-}
+table.list tbody tr:nth-child(even) { background: #eee; }
+table.list thead th { background: #ffeff5; color: #9d0052; }
+tr.normal {  }
+tr.disabled { color: #ccc; }
 
-label.line { width: 100px; display: inline-table;}
+.form textarea { width: auto; }
+.form label.line { width: 100px; display: inline-table;}
 
 a.fancy { font-size: large; font-weight: bold; }
 a.add { color: #58BD76; }
@@ -22,4 +25,7 @@ ul.places li.busy { list-style-image: url(/images/user.png); }
 
 a img {border:none;}
 a.logo { text-indent: -9999px; display: block; width: 226px; height: 44px; background: transparent url(/images/logo.png) no-repeat; margin: 0; border: 0; padding: 0; }
+
+/* tools */
+.t-center { text-align: center !important; }
 

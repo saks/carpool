@@ -3,40 +3,59 @@
 		<a href="/" class="logo left">Carpool</a>
 	</div>
 	<hr class="space">
-  <a href="#" id="add_request" class="fancy add">Попутчиков мне!</a>
+  <a href="/requests/add" id="add_request" class="fancy add">Попутчиков мне!</a>
   <a href="#" id="cancel_request" class="fancy cancel hide">Я передумал!</a>
+  <hr class="space"/>
   <div class="form hide">
   <%= render :partial => "form"  %>
   </div>
   <table border="0" cellspacing="5" cellpadding="5" class="list">
-    <tr>
-      <th>Когда</th>
-      <th>Откуда → Куда</th>
-      <th>Свободные места</th>
-      <th>Имя</th>
-      <th>Телефон</th>      
-      <th>Описание</th>      
-    </tr>
-    <% @requests.each do | request | -%>
-    	<tr>
-    		<td><%= request.time.to_s(:db) %></td>
-    		<td><%= request.from + ' → ' + request.to %></td>
-    		<td>
-    		  <span class="empty_count"><%= request.places_number.to_i - request.busy.to_i  %></span>
-    		  из
-    		  <span class="places_number"><%= request.places_number %></span> 
-    		  <a class="get_place" href="/requests/<%= request.id %>/accept">занять</a>
-    		</td>
-    		<td><%= request.user.name %></td>
-    		<td><%= request.user.phone_number %></td>
-    		<td>
-    		  <a href="/requests/<%= request.id %>">подробнее</a>    		  
-    		  <% if may_edit? request -%>
-    		    &nbsp;|&nbsp;
-    		    <a href="/requests/<%= request.id %>/edit">править</a><br/>
-    		  <% end -%>
-    		</td>
-    	</tr>
-    <% end -%>
+    <thead>
+      <tr>
+        <th>День</th>
+        <th>Время</th>
+        <th>Откуда → Куда</th>
+        <th>Свободные места</th>
+        <th>Имя</th>
+        <th>Телефон</th>
+        <th>Описание</th>
+      </tr>
+      <tr>
+      </tr>
+    </thead>
+    <tbody>
+      <% cur_day = '' %>
+      <% @requests.each do | request | -%>
+        <% req_active = (request.places_number.to_i > request.busy.to_i && (Time.now - request.time).to_i / 86400 < 1) %>
+      	<tr class="<%= req_active ? 'normal' : 'disabled' %>">
+      	  <% req_day = request.time.strftime('%d %b') %>
+      		<th>
+      		  <% if cur_day != req_day %>
+      		  <%= req_day %>
+      		  <% end %>
+      		  <% cur_day = req_day if cur_day != req_day %>
+      		</th>
+          <td><%= request.time.strftime('%H:%M') %></td>
+      		<td><%= request.from + ' → ' + request.to %></td>
+      		<td>
+      		  <span class="empty_count"><%= request.places_number.to_i - request.busy.to_i  %></span>
+      		  из
+      		  <span class="places_number"><%= request.places_number %></span>
+      		  <% if req_active %>
+      		    &nbsp;<a class="get_place" href="/requests/<%= request.id %>/accept">занять</a>
+      		  <% end %>
+      		</td>
+      		<td><%= request.user.name %></td>
+      		<td><%= request.user.phone_number %></td>
+      		<td>
+      		  <a href="/requests/<%= request.id %>">подробнее</a>
+      		  <% if may_edit? request -%>
+      		    &nbsp;|&nbsp;
+      		    <a href="/requests/<%= request.id %>/edit">править</a><br/>
+      		  <% end -%>
+      		</td>
+      	</tr>
+      <% end -%>
+    </tbody>
   </table>
 </div>

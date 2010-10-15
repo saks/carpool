@@ -28,6 +28,21 @@ class RequestsController < ApplicationController
 		redirect_to root_path
 	end
 
+	def show
+		@request = Request.find params[:id]
+	end
+
+	def edit
+		@request = Request.find params[:id]
+	end
+
+	def update
+		@request = Request.find params[:id]
+
+		@request.update_attributes params[:request]
+		redirect_to root_path
+	end
+
 	def accept
 		@request = Request.find params[:id]
 		@request.busy += 1 if @request.busy < @request.places_number

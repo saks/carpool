@@ -30,7 +30,7 @@ class RequestsController < ApplicationController
 		render :text => @request.places_number.to_s
 	end
 
-	def accept
+	def free
 		@request = Request.find params[:id]
 		@request.busy -= 1 if @request.busy > 0
 		@request.save

@@ -13,7 +13,7 @@
     <tr>
       <th>Когда</th>
       <th>Откуда → Куда</th>
-      <th>Места</th>
+      <th>Свободные места</th>
       <th>Имя</th>
       <th>Телефон</th>
     </tr>
@@ -21,7 +21,12 @@
     	<tr>
     		<td><%= request.time.to_s(:db) %></td>
     		<td><%= request.from + ' → ' + request.to %></td>
-    		<td><%= request.places_number %>/2 <a class="get_place" href="/requests/<%= request.id %>/accept">занять</a></td>
+    		<td>
+    		  <span class="empty_count"><%= request.places_number.to_i - request.busy.to_i  %></span>
+    		  из
+    		  <span class="places_number"><%= request.places_number %></span> 
+    		  <a class="get_place" href="/requests/<%= request.id %>/accept">занять</a>
+    		</td>
     		<td><%= request.user.name %></td>
     		<td><%= request.user.phone_number %></td>
     	</tr>

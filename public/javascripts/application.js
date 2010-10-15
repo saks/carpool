@@ -14,11 +14,12 @@ $(document).ready(function(){
   $('a.get_place').click(function(e){
     e.preventDefault();
     if (confirm('Точно поедете?')) {
+      var tr = $(this).parents('tr');
       $.ajax({
-        url: this.href, 
-        type: 'PUT', 
-        success: function(){
-          alert(1);
+        url: this.href,
+        type: 'PUT',
+        success: function(str){          
+          tr.find('span.empty_count').text(str);
         }
       });
     }

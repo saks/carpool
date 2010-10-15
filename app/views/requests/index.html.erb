@@ -7,74 +7,7 @@
   <a href="#" id="add_request" class="fancy add">Попутчиков мне!</a>
   <a href="#" id="cancel_request" class="fancy cancel hide">Я передумал!</a>
   <div class="form hide">
-
-		<% form_for @request, :action => 'create' do |f| -%>
-          <label for="request_from">Откуда</label>
-          <select name="request[from]" id="request_from">
-            <option value="diby">DiBy</option>
-            <option value="minsk">Минск</option>
-          </select>
-          <label for="request_to">Куда</label>
-          <select name="request[to]" id="request_to">
-            <option value="minsk">Минск</option>
-            <option value="diby">DiBy</option>
-          </select><br/>
-
-
-          <label for="request_name" class="line">Имя</label>
-                     <input type="text" name="request[name]" value="" id="request_name"/><br/>
-                     <label for="request_phone_number"  class="line">Телефон</label>
-                     <input type="text" name="request[phone_number]" value="" id="request_phone_number" /><br/>
-                     <label for="request_date"  class="line">Дата</label>
-          <input type="date" name="request[date]" id="request_date"/>
-
-
-
-      <select name="request[hours]" id="request_hours">
-        <option value="01">01</option>
-        <option value="02">02</option>
-        <option value="03">03</option>
-        <option value="04">04</option>
-        <option value="05">05</option>
-        <option value="06">06</option>
-        <option value="07">07</option>
-        <option value="08">08</option>
-        <option value="09">09</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-        <option value="16">16</option>
-        <option value="17">17</option>
-        <option value="18">18</option>
-        <option value="19">19</option>
-        <option value="20">20</option>
-        <option value="21">21</option>
-        <option value="22">22</option>
-        <option value="23">23</option>
-        <option value="24">24</option>
-      </select>ч
-      <select name="request[minutes]" id="request_minutes">
-        <option value="00">00</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-        <option value="30">30</option>
-        <option value="40">40</option>
-        <option value="50">50</option>
-
-        </select> мин
-        <br/>
-
-        <label for="request_places_number" class="line">Количество мест</label>
-                    <input type="text" name="request[places_number]" value="" id="request_number"/><br/><br/>
-        <label for="request_description">Описание</label><br/>
-        <textarea name="request[description]" id="request_description" rows="4" cols="40"></textarea>
-
-      <p><input type="submit" value="Эх подвезу!"></p>
-    </form>
-    <% end %>
+  <%= render :partial => "form"  %>
   </div>
   <table border="0" cellspacing="5" cellpadding="5" class="list">
     <tr>
@@ -88,27 +21,10 @@
     	<tr>
     		<td><%= request.time.to_s(:db) %></td>
     		<td><%= request.from + ' → ' + request.to %></td>
-    		<td><%= request.places_number %></td>
+    		<td><%= request.places_number %>/2 <a class="get_place" href="/requests/<%= request.id %>/accept">занять</a></td>
     		<td><%= request.user.name %></td>
     		<td><%= request.user.phone_number %></td>
     	</tr>
     <% end -%>
   </table>
 </div>
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function(){
-  	$('input[type=date]').dateinput({format: 'yyyy-mm-dd'});
-    $('#add_request').click(function(e){
-      $('.form').show();
-      $('#cancel_request').show();
-      $(this).hide();
-    });
-    $('#cancel_request').click(function(e){
-      $('.form').hide();
-      $(this).hide();
-      $('#add_request').show();
-    });
-
-  });
-</script>
-

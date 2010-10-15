@@ -18,7 +18,7 @@ $(document).ready(function(){
       $.ajax({
         url: this.href,
         type: 'PUT',
-        success: function(str){          
+        success: function(str){
           tr.find('span.empty_count').text(str);
         }
       });

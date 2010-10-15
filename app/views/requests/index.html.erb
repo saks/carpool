@@ -1,4 +1,3 @@
-
 <div class="container">
 	<div class="header">
 		<a href="/" class="logo left">Carpool</a>
@@ -15,7 +14,8 @@
       <th>Откуда → Куда</th>
       <th>Свободные места</th>
       <th>Имя</th>
-      <th>Телефон</th>
+      <th>Телефон</th>      
+      <th>Описание</th>      
     </tr>
     <% @requests.each do | request | -%>
     	<tr>
@@ -29,6 +29,13 @@
     		</td>
     		<td><%= request.user.name %></td>
     		<td><%= request.user.phone_number %></td>
+    		<td>
+    		  <a href="/requests/<%= request.id %>">подробнее</a>    		  
+    		  <% if may_edit? request -%>
+    		    &nbsp;|&nbsp;
+    		    <a href="/requests/<%= request.id %>/edit">править</a><br/>
+    		  <% end -%>
+    		</td>
     	</tr>
     <% end -%>
   </table>

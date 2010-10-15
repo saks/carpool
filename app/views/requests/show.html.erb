@@ -1,0 +1,13 @@
+<div>
+	<p><strong>Когда:</strong> <%= request.time.to_s(:db) %></p>
+	<p><%= request.from + ' → ' + request.to %></p>
+	<p>
+	  <span class="empty_count"><%= request.places_number.to_i - request.busy.to_i  %></span>
+	  из
+	  <span class="places_number"><%= request.places_number %></span> 
+	  <a class="get_place" href="/requests/<%= request.id %>/accept">занять</a>
+	</p>
+	<p><%= request.user.name %></p>
+	<p><%= request.user.phone_number %></p>
+	<p><a href="/requests/<%= request.id %>">подробнее</a></p>
+</div>

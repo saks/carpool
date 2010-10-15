@@ -11,7 +11,7 @@ class RequestsController < ApplicationController
 		user.name = params[:request].delete 'name'
 		user.save!
 
-		user.requests.create({
+		request = user.requests.create({
 			:from          => params[:request]['from'],
 			:to            => params[:request]['to'],
 			:comment       => params[:request]['description'],
@@ -19,6 +19,12 @@ class RequestsController < ApplicationController
 			:places_number => params[:request]['places_number'],
 			:busy          => 0,
 		})
+
+		cookies[:carpool_key] = {
+			:value => request.id.to_s,
+			:expires => 3.days.from_now
+		}
+
 		redirect_to root_path
 	end
 

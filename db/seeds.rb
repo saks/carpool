@@ -6,8 +6,3 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 
-
-user = User.create phone_number: '+375296786785'
-
-user.requests.create :from => 'DI', :to => 'minsk', :time => Time.now, :comment => 'some text', :places_number => 3
-

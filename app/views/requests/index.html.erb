@@ -26,7 +26,7 @@
     <tbody>
       <% cur_day = '' %>
       <% @requests.each do | request | -%>
-        <% req_active = (request.places_number.to_i > request.busy.to_i && (Time.now - request.time).to_i / 86400 < 1) %>
+        <% req_active = (request.places_number.to_i > request.busy.to_i && (Time.now - request.time).to_i / 60*60 < 4) %>
       	<tr class="<%= req_active ? 'normal' : 'disabled' %>">
       	  <% req_day = request.time.strftime('%d %b') %>
       		<th>

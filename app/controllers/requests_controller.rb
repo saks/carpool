@@ -27,7 +27,7 @@ class RequestsController < ApplicationController
 		@request.busy += 1 if @request.busy < @request.places_number
 		@request.save
 
-		render :text => @request.places_number.to_s
+		render :text => @request.places_number - @request.busy
 	end
 
 	def free
@@ -35,7 +35,7 @@ class RequestsController < ApplicationController
 		@request.busy -= 1 if @request.busy > 0
 		@request.save
 
-		render :text => @request.places_number.to_s
+		render :text => @request.places_number - @request.busy
 	end
 
 

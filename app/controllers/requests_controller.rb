@@ -32,7 +32,7 @@ class RequestsController < ApplicationController
 		})
 
 		cookies[:carpool_key] = {
-			:value => request.id.to_s,
+			:value => (cookies[:carpool_key].to_s.split(',') << request.id).join(','),
 			:expires => 3.days.from_now
 		}
 

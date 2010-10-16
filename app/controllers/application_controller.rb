@@ -19,11 +19,11 @@ class ApplicationController < ActionController::Base
       format.any  { head :not_found }
     end
   end
-  
-  def may_edit?(request)
-		cookies[:carpool_key].to_i == request.id
+
+	def may_edit?(request)
+		cookies[:carpool_key].split(',').map(&:to_i).include? request.id
 	end
-	
-	
+
+
 end
 

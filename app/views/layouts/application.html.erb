@@ -11,8 +11,12 @@
     <%= javascript_include_tag 'jquery.min.js', 'jquery.tools.min.js', 'application' %>
 	</head>
 	<body>
-		<%= yield %>
+	  <div class="container">
+    	<div class="header">
+    		<a href="/" class="logo left">Carpool</a>
+    	</div>
+    	<hr class="space">
+		  <%= yield %>
+		</div>
 	</body>
-
 </html>
-

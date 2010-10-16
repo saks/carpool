@@ -10,14 +10,14 @@ class RequestsController < ApplicationController
 		user = User.find_or_create_by_phone_number params[:request].delete 'phone_number'
 		user.name = params[:request].delete 'name'
 		user.save!
-
+    busy = params[:request]['places_number'].to_i - params[:request]['empty'].to_i
 		request = user.requests.create({
 			:from          => params[:request]['from'],
 			:to            => params[:request]['to'],
-			:comment       => params[:request]['description'],
+			:comment       => params[:request]['comment'],
 			:time          => time,
-			:places_number => params[:request]['places_number'],
-			:busy          => 0,
+			:places_number => params[:request]['places_number'].to_i < 0 ? 0 : params[:request]['places_number'],
+			:busy          => busy < 0 ? 0 : busy,
 		})
 
 		cookies[:carpool_key] = {
@@ -38,7 +38,17 @@ class RequestsController < ApplicationController
 
 	def update
 		@request = Request.find params[:id]
-
+		
+    user = User.find @request.user_id
+    user.phone_number = params[:request].delete 'phone_number'
+    user.name = params[:request].delete 'name'
+    user.save!
+    
+    @request.time = Time.parse "#{params[:request].delete('date')} #{params[:request].delete('hours')}:#{params[:request].delete('minutes')}";
+    @request.busy = params[:request]['places_number'].to_i - params[:request].delete('empty').to_i
+    @request.busy = 0 unless @request.busy > 0
+    @request.save!
+    
 		@request.update_attributes params[:request]
 		redirect_to root_path
 	end

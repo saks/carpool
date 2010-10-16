@@ -1,64 +1,32 @@
-<% form_for @request, :action => 'create', :id => 'user' do |f| -%>
+<% form_for req, :action => 'create', :id => 'user' do |f| -%>
   <label for="request_from">Откуда</label>
-  <select name="request[from]" id="request_from">
-    <option value="diby">DiBy</option>
-    <option value="minsk">Минск</option>
-  </select>
+  <%= select(:request, :from, %w[Минск #di_by], { :index => req.from })%>  
   <label for="request_to">Куда</label>
-  <select name="request[to]" id="request_to">
-    <option value="minsk">Минск</option>
-    <option value="diby">DiBy</option>
-  </select><br/>
+  <%= select(:request, :to, %w[Минск #di_by], { :index => req.to })%>
+  <br />
 
-  <label for="request_name" class="line">Имя</label>
-   <input type="text" name="request[name]" value="" id="request_name"/><br/>
-   <label for="request_phone_number"  class="line">Телефон</label>
-   <input type="text" name="request[phone_number]" value="" id="request_phone_number" /><br/>
-   <label for="request_date"  class="line">Дата</label>
-  <input type="date" name="request[date]" id="request_date"/>
+  <label for="request_name" class="line">Имя</label>  
+  <input type="text" name="request[name]" id="request_name" value="<%= req.user.name unless req.user.nil? %>"/>
   <br/>
+  
+  <label for="request_phone_number"  class="line">Телефон</label>
+  <input type="text" name="request[phone_number]" value="<%= req.user.phone_number unless req.user.nil? %>" id="request_phone_number" />
+  <br/>
+  
+  <label for="request_date"  class="line">Дата</label>
+  <input type="date" name="request[date]" id="request_date" value="<%= req.time.strftime('%Y-%m-%d') unless req.time.nil? %>"/>
+  <br/>
+  
   <label for="request_hours" class="line">Время</label>
-  <select name="request[hours]" id="request_hours">
-    <option value="01">01</option>
-    <option value="02">02</option>
-    <option value="03">03</option>
-    <option value="04">04</option>
-    <option value="05">05</option>
-    <option value="06">06</option>
-    <option value="07">07</option>
-    <option value="08">08</option>
-    <option value="09">09</option>
-    <option value="10">10</option>
-    <option value="11">11</option>
-    <option value="12">12</option>
-    <option value="13">13</option>
-    <option value="14">14</option>
-    <option value="15">15</option>
-    <option value="16">16</option>
-    <option value="17">17</option>
-    <option value="18">18</option>
-    <option value="19">19</option>
-    <option value="20">20</option>
-    <option value="21">21</option>
-    <option value="22">22</option>
-    <option value="23">23</option>
-    <option value="24">24</option>
-  </select>ч
-  <select name="request[minutes]" id="request_minutes">
-    <option value="00">00</option>
-    <option value="10">10</option>
-    <option value="20">20</option>
-    <option value="30">30</option>
-    <option value="40">40</option>
-    <option value="50">50</option>
+  <%= select_hour(req.time, {}, {:id => 'request_hours', :name => 'request[hours]'}) %>ч
+  <%= select_minute(req.time, {}, {:id => 'request_minutes', :name => 'request[minutes]'}) %> мин
+  <br/>
 
-    </select> мин
-    <br/>
-
-    <label for="request_places_number" class="line">Количество мест</label>
-                <input type="text" name="request[places_number]" value="" id="request_number"/><br/><br/>
-    <label for="request_description">Описание</label><br/>
-    <textarea name="request[description]" id="request_description" rows="4" cols="29"></textarea>
-
+  <label for="request_empty" class="line">Свободно мест</label>
+  <input type="text" name="request[empty]" value="<%= req.places_number.to_i - req.busy.to_i %>" id="request_empty" size="2"/> из <input type="text" name="request[places_number]" value="<%= req.places_number %>" id="request_number" size="2"/>
+  <br/><br/>
+  
+  <label for="request_description">Описание</label><br/>
+  <textarea name="request[comment]" id="request_comment" rows="4" cols="29"><%= req.comment %></textarea>
   <p><input type="submit" value="Эх подвезу!"></p>
 <% end %>

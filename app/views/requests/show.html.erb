@@ -1,15 +1,15 @@
 <div>
   <p><strong>Когда:</strong> <%= @request.time.to_s('%d %b %H:%M') %></p>
-  <p><strong>Откуда → Куда:</strong> <%= @request.from + ' → ' + @request.to %></p>
+  <p><strong>Откуда → Куда:</strong> <%= h(@request.from) + ' → ' + h(@request.to) %></p>
   <p><strong>Свободные места:</strong> <span class="empty_count"><%= @request.places_number.to_i - @request.busy.to_i  %></span>
     из
-    <span class="places_number"><%= @request.places_number %></span>
+    <span class="places_number"><%= h @request.places_number %></span>
     <% if @request.places_number.to_i > @request.busy.to_i -%>
 		  <a class="get_place" href="/requests/<%= @request.id %>/accept">занять</a>
     <% end -%>
   </p>
-  <p><strong>Имя:</strong> <%= @request.user.name %></p>
-  <p><strong>Телефон:</strong> <%= @request.user.phone_number %></p>
-  <p><strong>Комментарий:</strong> <%= @request.comment %></p>
+  <p><strong>Имя:</strong> <%= h @request.user.name %></p>
+  <p><strong>Телефон:</strong> <%= h @request.user.phone_number %></p>
+  <p><strong>Комментарий:</strong> <%= h @request.comment %></p>
 </div>
 

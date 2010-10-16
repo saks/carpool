@@ -29,3 +29,4 @@ a.logo { text-indent: -9999px; display: block; width: 226px; height: 44px; backg
 /* tools */
 .t-center { text-align: center !important; }
 
+.beta { color: #9d0052; font-size: 16px; }

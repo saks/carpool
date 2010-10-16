@@ -23,6 +23,9 @@ $(document).ready(function(){
     e.preventDefault();
     if (confirm('Точно поедете?')) {
       var tr = $(this).parents('tr');
+      if (tr.length == 0) {
+        tr = $(this).parents('p');
+      }
       var link = $(this);
       $.ajax({
         url: this.href,

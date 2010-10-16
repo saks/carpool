@@ -35,13 +35,13 @@
     		<td>
     		  <span class="empty_count"><%= request.places_number.to_i - request.busy.to_i  %></span>
     		  из
-    		  <span class="places_number"><%= request.places_number %></span>
+    		  <span class="places_number"><%= request.places_number.to_i %></span>
     		  <% if req_active %>
     		    &nbsp;<a class="get_place" href="/requests/<%= request.id %>/accept">занять</a>
     		  <% end %>
     		</td>
-    		<td><%= request.user.name %></td>
-    		<td><%= request.user.phone_number %></td>
+    		<td><%= h request.user.name %></td>
+    		<td><%= h request.user.phone_number %></td>
     		<td>
     		  <a href="/requests/<%= request.id %>">подробнее</a>
     		  <% if may_edit? request -%>
@@ -53,3 +53,4 @@
     <% end -%>
   </tbody>
 </table>
+

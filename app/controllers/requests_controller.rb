@@ -21,12 +21,14 @@ class RequestsController < ApplicationController
 		user = User.find_or_create_by_phone_number params[:request].delete 'phone_number'
 		user.name = params[:request].delete 'name'
 		user.save!
+
     busy = params[:request]['places_number'].to_i - params[:request]['empty'].to_i
 		request = user.requests.create({
 			:from          => params[:request]['from'],
 			:to            => params[:request]['to'],
 			:comment       => params[:request]['comment'],
 			:time          => time,
+			:price         => params[:request]['price'],
 			:places_number => params[:request]['places_number'].to_i < 0 ? 0 : params[:request]['places_number'],
 			:busy          => busy < 0 ? 0 : busy,
 		})

@@ -7,6 +7,8 @@ ActionController::Routing::Routes.draw do |map|
 			:free => :put
 		}
 
+	map.search '/search', :controller => 'requests', :action => 'search'
+
 	map.root :controller => 'requests', :action => 'index'
 
 

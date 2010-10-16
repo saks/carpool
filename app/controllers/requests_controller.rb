@@ -4,6 +4,17 @@ class RequestsController < ApplicationController
 		@requests = Request.find :all, :order => 'time'
 	end
 
+	def search
+		#XXX only `from` and `to` params are used. All other params are ignored now
+
+		result = Request.find_all_by_from_and_to params[:from], params[:to]
+
+		render :json => {
+			:requests => result,
+			:drivers  => User.all,
+		}
+	end
+
 	def create
 		time = Time.parse "#{params[:request]['date']} #{params[:request]['hours']}:#{params[:request]['minutes']}"
 

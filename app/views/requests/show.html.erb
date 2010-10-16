@@ -3,10 +3,13 @@
   <p><strong>Откуда → Куда:</strong> <%= @request.from + ' → ' + @request.to %></p>
   <p><strong>Свободные места:</strong> <span class="empty_count"><%= @request.places_number.to_i - @request.busy.to_i  %></span>
     из
-    <span class="places_number"><%= @request.places_number %></span> 
-    <a class="get_place" href="/requests/<%= @request.id %>/accept">занять</a>
+    <span class="places_number"><%= @request.places_number %></span>
+    <% if @request.places_number.to_i > @request.busy.to_i -%>
+		  <a class="get_place" href="/requests/<%= @request.id %>/accept">занять</a>
+    <% end -%>
   </p>
   <p><strong>Имя:</strong> <%= @request.user.name %></p>
   <p><strong>Телефон:</strong> <%= @request.user.phone_number %></p>
   <p><strong>Комментарий:</strong> <%= @request.comment %></p>
 </div>
+

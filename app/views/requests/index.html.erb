@@ -45,8 +45,8 @@
     		<td>
     		  <a href="/requests/<%= request.id %>">подробнее</a>
     		  <% if may_edit? request -%>
-    		    &nbsp;|&nbsp;
-    		    <a href="/requests/<%= request.id %>/edit">править</a><br/>
+    		    &nbsp;|&nbsp;<a href="/requests/<%= request.id %>/edit">править</a>
+    		    &nbsp;|&nbsp;<a href="/requests/delete/<%= request.id %>" class="delete">удалить</a>
     		  <% end -%>
     		</td>
     	</tr>

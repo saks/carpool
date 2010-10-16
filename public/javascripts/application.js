@@ -13,6 +13,12 @@ $(document).ready(function(){
     $('#add_request').show();
   });
   
+  $('a.delete').click(function(e){
+    if (!confirm('Точно удалить?')) {
+      e.preventDefault();
+    }
+  });
+  
   $('a.get_place').click(function(e){
     e.preventDefault();
     if (confirm('Точно поедете?')) {

@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 
 	map.resources :requests,
-		:only   => [:index, :create, :show, :edit, :update],
+		:only   => [:index, :create, :show, :edit, :update, :delete],
 		:member => {
 			:accept => :put,
 			:free => :put

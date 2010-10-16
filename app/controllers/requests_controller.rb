@@ -32,9 +32,20 @@ class RequestsController < ApplicationController
 		@request = Request.find params[:id]
 	end
 
-	def edit
-		@request = Request.find params[:id]
-	end
+  def edit    
+    @request = Request.find params[:id]
+    render_404 unless may_edit?(@request)
+  end
+
+  def delete
+    @request = Request.find params[:id]
+    if may_edit?(@request)
+      @request.delete
+      redirect_to root_path
+    else  
+      render_404
+    end
+  end
 
 	def update
 		@request = Request.find params[:id]
@@ -69,6 +80,4 @@ class RequestsController < ApplicationController
 		render :text => @request.places_number - @request.busy
 	end
 
-
 end
-

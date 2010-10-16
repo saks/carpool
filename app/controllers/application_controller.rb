@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
   end
 
 	def may_edit?(request)
-		cookies[:carpool_key].split(',').map(&:to_i).include? request.id
+		cookies[:carpool_key].to_s.split(',').map(&:to_i).include? request.id
 	end
 
 
